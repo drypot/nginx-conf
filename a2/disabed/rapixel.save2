@@ -1,0 +1,40 @@
+
+# rapixel.com
+
+server {
+  server_name www.rapixel.com;
+
+  return 301 https://rapixel.com$request_uri;
+}
+
+server {
+  server_name rapixel.com;
+
+  root /data/web/raysoda/public;
+
+  client_max_body_size 25m;
+  client_body_temp_path /data2/nginx-temp;
+  
+  location / {
+    try_files $uri @app;
+  }
+
+  location @app {
+    proxy_pass http://localhost:8020;
+    proxy_set_header Host $http_host;
+  }
+}
+
+server {
+  server_name file.rapixel.com;
+
+  root /data2/rapixel/public;
+
+  location / {
+    valid_referers none blocked rapixel.com;
+    if ($invalid_referer) {
+      return   403;
+    }
+  }
+}
+

@@ -1,0 +1,57 @@
+
+# drypot.com
+
+server {
+  listen 443 ssl http2;
+  ssl_certificate /etc/letsencrypt/live/drypot.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/drypot.com/privkey.pem;
+  ssl_trusted_certificate /etc/letsencrypt/live/drypot.com/chain.pem;
+  include /data/nginx/ssl.inc;
+
+  server_name www.drypot.com;
+
+  return 301 https://drypot.com$request_uri;
+}
+
+server {
+  listen 443 ssl http2;
+  ssl_certificate /etc/letsencrypt/live/drypot.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/drypot.com/privkey.pem;
+  ssl_trusted_certificate /etc/letsencrypt/live/drypot.com/chain.pem;
+  include /data/nginx/ssl.inc;
+
+  server_name drypot.com;
+
+  root /data/web/raysoda/public;
+
+  client_max_body_size 10m;
+  client_body_temp_path /data2/nginx-temp;
+  
+  location / {
+    try_files $uri @app;
+  }
+
+  location @app {
+    proxy_pass http://localhost:8040;
+    proxy_set_header Host $http_host;
+  }
+}
+
+server {
+  listen 443 ssl http2;
+  ssl_certificate /etc/letsencrypt/live/drypot.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/drypot.com/privkey.pem;
+  ssl_trusted_certificate /etc/letsencrypt/live/drypot.com/chain.pem;
+  include /data/nginx/ssl.inc;
+
+  server_name file.drypot.com;
+
+  root /data2/drypot/public;
+
+  location / {
+    valid_referers none blocked drypot.com;
+    if ($invalid_referer) {
+      return   403;
+    }
+  }
+}
