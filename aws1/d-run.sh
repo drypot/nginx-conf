@@ -12,8 +12,8 @@ args=(
   --mount type=bind,source=/data/certbot/letsencrypt,target=/etc/letsencrypt,readonly
   --mount type=bind,source=/data/service,target=/data/service,readonly
   --mount type=bind,source=/data/upload,target=/data/upload,readonly
-  -it --rm
-#  -d
+#  -it --rm
+  -d
   nginx:1.19.7
 #  nginx-debug -g 'daemon off;'
 )
