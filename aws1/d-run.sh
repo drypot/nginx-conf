@@ -14,7 +14,7 @@ args=(
   --mount type=bind,source=/data/upload,target=/data/upload,readonly
   -it --rm
 #  -d
-  nginx
+  nginx:1.19.7
 #  nginx-debug -g 'daemon off;'
 )
 docker run "${args[@]}"
