@@ -9,7 +9,7 @@ args=(
   --mount type=bind,source=/data/nginx/nginx-conf/aws1/sites,target=/etc/nginx/sites,readonly
   --mount type=bind,source=/data/nginx/tmp,target=/data/nginx/tmp
   --mount type=bind,source=/var/lib/letsencrypt,target=/var/lib/letsencrypt,readonly
-  --mount type=bind,source=/data/certbot/letsencrypt,target=/etc/letsencrypt,readonly
+  --mount type=bind,source=/data/nginx/letsencrypt,target=/etc/letsencrypt,readonly
   --mount type=bind,source=/data/service,target=/data/service,readonly
   --mount type=bind,source=/data/upload,target=/data/upload,readonly
 #  -it --rm
