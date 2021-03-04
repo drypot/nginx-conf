@@ -16,14 +16,14 @@ mac에서는 brew로 nginx를 설치한다.
 
 linux에서는 기본 http계정으로 동작한다.\
 http로 동작하면 개발중인 디렉터리에 접근하지 못한다.\
-nginx.conf 의 user를 세팅해줘야 한다.\
+`nginx.conf` 의 `user`를 세팅해줘야 한다.\
 
     user drypot wheel;  # arch
 
 ## certbot
 
-d-certbot-new-* 스크립트로 첫 인증서를 생성한다.\
-../letsencrypt 디렉토리셋이 만들어진다.\
-common/* 파일들을 ../letencrypt 에 복사한다.\
-letsencrypt 디렉토리에 ssl-dhparams 을 생성한다.
+`d-certbot-new-*` 스크립트로 첫 인증서를 생성한다.\
+`../letsencrypt` 디렉토리셋이 만들어진다.\
+`common/*` 파일들을 `../letsencrypt` 에 복사한다.\
+`letsencrypt` 디렉토리에 `ssl-dhparams` 을 생성한다.
 
